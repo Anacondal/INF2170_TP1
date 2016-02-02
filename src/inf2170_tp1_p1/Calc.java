@@ -96,72 +96,87 @@ public class Calc {
         int reste;
         int reponse = 0;
         char operateur = ' ';
+        int compteur = 0;
         System.out.println("Entrer un opérande");
         operande = deci();
         do {
-            System.out.println("Entrer un opérateur");
-            operateur = sc.next().charAt(0);
-            chari();
-            switch (operateur) {
-                case '+':
-                    System.out.println("Entrer un opérande");
-                    operande2 = deci();
-                    reponse = operande + operande2;
-                    System.out.println("Entrer un opérateur");
-                    operateur = sc.next().charAt(0);
-                    break;
-                case '-':
-                    System.out.println("Entrer un opérande");
-                    operande2 = deci();
-                    reponse = operande - operande2;
-                    System.out.println("Entrer un opérateur");
-                    operateur = sc.next().charAt(0);
-                    break;
-                case '*':
-                    System.out.println("Entrer un opérande");
-                    operande2 = deci();
-                    for (int i = 0; i < operande2; i++) {
-                        reponse = reponse + operande;
-                    }
-                    System.out.println("Entrer un opérateur");
-                    operateur = sc.next().charAt(0);
-                    break;
-                case '/':
-                    System.out.println("Entrer un opérande");
-                    operande2 = deci();
-                    reste = operande;
-                    for (int i = 1; reste >= operande2; i++) {
-                        reste = reste - operande2;
-                        reponse = i;
-                    }
-                    System.out.println("Entrer un opérateur");
-                    operateur = sc.next().charAt(0);
-                    break;
-                case '%':
-                    System.out.println("Entrer un opérande");
-                    operande2 = deci();
-                    reste = operande;
-                    for (int i = 0; reste >= operande2; i++) {
-                        reste = reste - operande2;
-                        reponse = reste;
-                    }
-                    System.out.println("Entrer un opérateur");
-                    operateur = sc.next().charAt(0);
-                    break;
+            compteur = 0;
+            operande2 = 0;
+            if (operateur != '=') {
+                System.out.println("Entrer un opérateur");
+                operateur = sc.next().charAt(0);
+                chari();
+            } else if (operateur == '=') {
+                System.out.println("Entrer un opérande");
+                operande = deci();
+                System.out.println("Entrer un opérateur");
+                operateur = sc.next().charAt(0);
+                chari();
             }
+            do {
+                if (operateur != '=' && compteur > 0) {
+                    operande = reponse;
+                }
+                switch (operateur) {
+                    case '+':
+                        System.out.println("Entrer un opérande");
+                        operande2 = deci();
+                        reponse = operande + operande2;
+                        System.out.println("Entrer un opérateur");
+                        operateur = sc.next().charAt(0);
+                        break;
+                    case '-':
+                        System.out.println("Entrer un opérande");
+                        operande2 = deci();
+                        reponse = operande - operande2;
+                        System.out.println("Entrer un opérateur");
+                        operateur = sc.next().charAt(0);
+                        break;
+                    case '*':
+                        System.out.println("Entrer un opérande");
+                        operande2 = deci();
+                        for (int i = 0; i < operande2; i++) {
+                            reponse = reponse + operande;
+                        }
+                        System.out.println("Entrer un opérateur");
+                        operateur = sc.next().charAt(0);
+                        break;
+                    case '/':
+                        System.out.println("Entrer un opérande");
+                        operande2 = deci();
+                        reste = operande;
+                        for (int i = 1; reste >= operande2; i++) {
+                            reste = reste - operande2;
+                            reponse = i;
+                        }
+                        System.out.println("Entrer un opérateur");
+                        operateur = sc.next().charAt(0);
+                        break;
+                    case '%':
+                        System.out.println("Entrer un opérande");
+                        operande2 = deci();
+                        reste = operande;
+                        for (int i = 0; reste >= operande2; i++) {
+                            reste = reste - operande2;
+                            reponse = reste;
+                        }
+                        System.out.println("Entrer un opérateur");
+                        operateur = sc.next().charAt(0);
+                        break;
+                }
+                compteur++;
+            } while (operateur == '+' || operateur == '-' || operateur == '*' || operateur == '/');
             if (operateur == '=') {
                 if (operande2 == 0) {
                     reponse = operande;
                 }
-                System.out.println(reponse);
-                System.out.println("Entrer un opérande");
-                operande = deci();
+                System.out.println("Réponse : " + reponse);
             }
         } while (operateur != 'q');
         if (operande2 == 0) {
             reponse = operande;
         }
-        System.out.println(reponse);
+        System.out.println("Réponse : " + reponse);
     }
 
 }
